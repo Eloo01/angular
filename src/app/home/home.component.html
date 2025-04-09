@@ -1,0 +1,39 @@
+<ul class="categories">
+    <li>All</li>
+@for (item of Categories; track $index) {
+
+<li>{{item.name}}</li>
+}
+</ul>
+
+<section class="products-content">
+
+<div class="filter-content">
+
+ <div class="filter-head"></div>
+ 
+</div>
+
+<section class="products">
+
+@for (item of allProducts; track $index) {
+    <div class="card" style="width: 18rem;">
+
+        <img src="{{item.image}}" class="card-img-top" alt="{{item.name}}">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="spiciness">spiciness:{{item.spiciness}}</p>
+       
+        <div class="groups">
+           
+        </div>
+
+        <div class="cart-footer">
+         <p class="card-price">${{item.price}}</p>
+         <button>add to card</button>
+        </div>
+
+      </div>
+}
+</section>
+
+</section>
