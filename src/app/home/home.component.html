@@ -24,7 +24,24 @@
         <p class="spiciness">spiciness:{{item.spiciness}}</p>
        
         <div class="groups">
-           
+
+            <div class="nuts">
+                <label class="custom-checkbox">
+                  <input type="checkbox" [checked]="item.nuts" disabled />
+                  <span class="circle"></span>
+                  nuts
+                </label>
+              </div>
+              
+              <div class="vegeterians">
+                <label class="custom-checkbox">
+                  <input type="checkbox" [checked]="item.vegeterian" disabled />
+                  <span class="circle"></span>
+                  vegeterian
+                </label>
+              </div>
+              
+
         </div>
 
         <div class="cart-footer">
