@@ -1,22 +1,60 @@
-<ul class="categories">
-    <li>All</li>
-@for (item of Categories; track $index) {
+<h1 class="head">Categories</h1>
 
-<li>{{item.name}}</li>
-}
+<ul class="categories">
+  <li
+    [class.active]="selectedCategoryId === null"
+    (click)="filterByCategory(null)"
+  >
+    All
+  </li>
+  @for (item of Categories; track $index) {
+    <li
+      [class.active]="selectedCategoryId === item.id"
+      (click)="filterByCategory(item.id)"
+    >
+      {{ item.name }}
+    </li>
+  }
 </ul>
+
+
 
 <section class="products-content">
 
 <div class="filter-content">
 
- <div class="filter-head"></div>
+  <h4>Filter</h4>
+
+
+  <div class="slider-container">
+    <label for="spiciness">Spiciness: {{ spiciness === 0 ? 'No Chosen' : spiciness }}</label>
+    <input
+      type="range"
+      id="spiciness"
+      min="0"
+      max="4"
+      [(ngModel)]="spiciness"
+    />
+
+  </div>
+
+ 
+  <div class="checkbox-group">
+    <label><input type="checkbox" [(ngModel)]="noNuts" /> No Nuts</label>
+    <label><input type="checkbox" [(ngModel)]="vegetarianOnly" /> Vegetarian Only</label>
+  </div>
+
+
+  <div class="button-group">
+    <button class="reset-button" (click)="resetFilters()">RESET</button>
+    <button class="apply-button" (click)="applyFilters()">APPLY FILTER</button>
+  </div>
  
 </div>
 
 <section class="products">
 
-@for (item of allProducts; track $index) {
+@for (item of filteredProducts; track $index) {
     <div class="card" style="width: 18rem;">
 
         <img src="{{item.image}}" class="card-img-top" alt="{{item.name}}">
