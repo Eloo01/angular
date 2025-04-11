@@ -1,3 +1,6 @@
+<app-popup [(show)]="popupVisible" [message]="popupMessage"></app-popup>
+
+
 <h1 class="head">Categories</h1>
 
 <ul class="categories">
@@ -84,7 +87,7 @@
 
         <div class="cart-footer">
          <p class="card-price">${{item.price}}</p>
-         <button>add to card</button>
+         <button (click)="addToCart(item)">add to card</button>
         </div>
 
       </div>

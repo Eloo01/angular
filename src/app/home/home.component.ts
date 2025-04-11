@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { ToolsService } from '../tools.service';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PopupComponent } from '../shared/popup/popup.component';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule],
+  imports: [FormsModule,PopupComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-constructor(public tools:ToolsService){
+constructor(public tools:ToolsService,private cartService:CartService){
   this.AllCategories()
   this.Allproducts()
 }
@@ -70,5 +72,24 @@ Allproducts() {
       return spicyMatch && nutsMatch && vegMatch;
     });
   }
+
+popupMessage: string = '';
+popupVisible: boolean = false;
+
+showPopup(message: string) {
+  this.popupMessage = message;
+  this.popupVisible = true;
+
+  setTimeout(() => {
+    this.popupVisible = false;
+  }, 3000);
+}
+addToCart(product: any) {
+  this.cartService.addItem(product);
+  this.showPopup(`${product.name} added to cart`);
+}
+
+
+
 
 }
