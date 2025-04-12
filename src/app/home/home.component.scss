@@ -1,0 +1,260 @@
+
+.head{
+text-align: center;
+margin-top: 4%;
+}
+
+.categories{
+
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+max-width: 90%;
+margin: auto;
+border-bottom: 5px ridge red;
+margin-top: 4%;
+gap: 27px;
+padding-left: 0;
+
+li{
+        position: relative;
+        padding: 10px 20px;
+        color:black;
+        font-size: 16px;
+        transition: transform 0.3s ease, background-color 1s ease, border 0.3s ease;
+        list-style-type: none;
+        border-radius: 2px;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1); 
+          background-color:red;
+          color: white;
+          border: 1px ridge black;
+        }
+       
+        &:hover::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+    
+        &:hover::before {
+          opacity: 1;
+        }
+        &.active {
+          background-color: red;
+          color: white;
+          border: 2px solid black;
+          transform: scale(1.05);
+        }
+      }
+    }
+.products-content{
+ max-width: 90%;
+ margin: auto;
+ display: flex;
+
+
+ 
+ .filter-content{
+ width: 23%;
+ height: 500px;
+ margin-top: 50px;
+ border: 2px solid darkgray;
+ border-radius: 5px;
+ background-color: rgba(219, 219, 219, 0.3);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+ h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.slider-container {
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  input[type="range"] {
+    width: 100%;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 4px;
+    color: #666;
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+    input {
+      margin-right: 8px;
+    }
+  }
+}
+
+.button-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .reset-button {
+    background-color: #ff0000;
+    color: #ffffff;
+    width: 75%;
+
+    &:hover {
+      background-color: #590000;
+    }
+  }
+
+  .apply-button {
+    background-color: #ff0000;
+    color: white;
+    width: 75%;
+
+    &:hover {
+      background-color: #590000;
+    }
+  }
+}
+ }
+  .products{
+    padding-top: 50px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    row-gap: 80px;
+    column-gap: 20px;
+    max-width: 70%;
+    padding-left: 4%;
+
+    .card{
+    background-image: url(cart.jpg);
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 5px groove black;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    &:hover{
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+  h5{
+  font-weight: 100;
+  }
+
+  button{
+  border:2px solid black;
+  background-color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease,;
+  cursor: pointer;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 5px;
+
+  &:hover{
+    background-color:rgb(0, 0, 0);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    color: white;
+  }
+
+  &:active{
+    transform: scale(1.02);
+  }
+  }
+  .groups{
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   
+   .custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: default;
+    user-select: none;
+  
+    input[type="checkbox"] {
+      display: none;
+    }
+  
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #4caf50; 
+      background-color: white;
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+  
+    input[type="checkbox"]:checked + .circle::after {
+      content: "✔";
+      color: #4caf50;
+      font-size: 14px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+    }
+  }
+  
+  
+  }
+  
+    }
+    }
+
+
+}
+ 

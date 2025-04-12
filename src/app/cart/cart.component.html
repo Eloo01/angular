@@ -1,0 +1,43 @@
+<h1>cart</h1>
+
+<div *ngIf="cartItems.length > 0; else emptyCart" class="cart-container">
+
+    <!-- სათაურები -->
+    <div class="cart-header">
+      <span class="product-col">Product</span>
+      <span class="qty-col">Qty</span>
+      <span class="price-col">Price</span>
+      <span class="total-col">Total</span>
+    </div>
+  
+    <!-- პროტუქტების ვიზუალი-->
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <div class="product-col product-info">
+        <button class="remove-btn" (click)="remove(item)">×</button>
+        <img [src]="item.image" alt="{{ item.name }}" />
+        <span>{{ item.name }}</span>
+      </div>
+
+       <!-- (inc)(dec) - ღილაკები -->
+      <div class="qty-col qty-controls">
+        <button (click)="decrease(item)">−</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increase(item)">+</button>
+      </div>
+  
+      <div class="price-col">${{ item.price }}</div>
+      <div class="total-col">${{ item.price * item.quantity }}</div>
+    </div>
+  
+    <!-- total price and checkout -->
+    <div class="cart-summary">
+      <h3>Total: ${{ getTotal() }}</h3>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </div>
+  
+  <ng-template #emptyCart>
+    <p class="empty-message">Your cart is empty.</p>
+  </ng-template>
+  
+  

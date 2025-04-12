@@ -1,0 +1,10 @@
+
+<div class="popup-backdrop" *ngIf="show" (click)="closePopup()">
+    <div class="popup-box" (click)="$event.stopPropagation()">
+      <div class="popup-icon">✔</div>
+      <p class="popup-message">{{ message }}</p>
+    </div>
+  </div>
+
+  
+  
