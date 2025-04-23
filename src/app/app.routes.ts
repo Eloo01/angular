@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ContactComponent } from './contact/contact.component';
 
 export const routes: Routes = [
 
@@ -9,7 +10,9 @@ export const routes: Routes = [
 
    { path: 'cart',component:CartComponent },
 
-   { path: 'checkout',component:CheckoutComponent }
+   { path: 'checkout',component:CheckoutComponent },
+
+   { path: 'contact',component:ContactComponent}
 
    
 ];

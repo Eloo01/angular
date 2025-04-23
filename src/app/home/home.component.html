@@ -30,27 +30,22 @@
 
 
   <div class="slider-container">
-    <label for="spiciness">Spiciness: {{ spiciness === 0 ? 'No Chosen' : spiciness }}</label>
-    <input
-      type="range"
-      id="spiciness"
-      min="0"
-      max="4"
-      [(ngModel)]="spiciness"
-    />
+    
+    <label for="">Spicness: {{spicness == "-1"? "not-chosen": spicness}}</label>
+    <input type="range" min="-1" max="4" [(ngModel)]="spicness">
 
   </div>
 
  
   <div class="checkbox-group">
-    <label><input type="checkbox" [(ngModel)]="noNuts" /> No Nuts</label>
-    <label><input type="checkbox" [(ngModel)]="vegetarianOnly" /> Vegetarian Only</label>
+    <label><input type="checkbox" [(ngModel)]="nuts" /> No Nuts</label>
+    <label><input type="checkbox" [(ngModel)]="vegetarian" /> Vegetarian Only</label>
   </div>
 
 
   <div class="button-group">
-    <button class="reset-button" (click)="resetFilters()">RESET</button>
-    <button class="apply-button" (click)="applyFilters()">APPLY FILTER</button>
+    <button class="reset-button" (click)="reset()">RESET</button>
+    <button class="apply-button" (click)="filterFoods()">APPLY FILTER</button>
   </div>
  
 </div>

@@ -15,6 +15,15 @@ export class ToolsService {
   getAllProducts(){
     return this.http.get("https://restaurant.stepprojects.ge/api/Products/GetAll")
   }
+
+  filterAllFoods(spicness:any, nuts:any, veget:any){
+    return this.http.get(`https://restaurant.stepprojects.ge/api/Products/GetFiltered?vegeterian=${veget}&nuts=${nuts}&spiciness=${spicness}`)
+  }
+  
+  filterCatgory(id:any){
+    return this.http.get(`https://restaurant.stepprojects.ge/api/Categories/GetCategory/${id}`)
+  }
+
   cart: any[] = [];
 
   addToCart(product: any) {

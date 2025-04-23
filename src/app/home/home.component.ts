@@ -32,46 +32,51 @@ Allproducts() {
   });
 }
 
-  spiciness: number = 0;
-  noNuts: boolean = false;
-  vegetarianOnly: boolean = false;
+public spicness:string="-1"
+public nuts:any=""
+public vegetarian:any=""
 
 
-  applyFilters() {
-    this.filteredProducts = this.allProducts.filter((item: any) => {
-      const spicyMatch =
-      this.spiciness === 0 || item.spiciness === this.spiciness;
-      const nutsMatch = !this.noNuts || !item.nuts;
-      const vegMatch = !this.vegetarianOnly || item.vegeterian;
-      return spicyMatch && nutsMatch && vegMatch;
-    });
-  }
+filterFoods() {
+  let spc = this.spicness === "-1" ? "" : this.spicness;
 
-  resetFilters() {
-    this.spiciness = 0;
-    this.noNuts = false;
-    this.vegetarianOnly = false;
-    this.filteredProducts = [...this.allProducts];
-  }
+  this.tools.filterAllFoods(spc, this.nuts, this.vegetarian).subscribe((data: any) => {
+    this.allProducts = data;
+
+
+    if (this.selectedCategoryId) {
+      this.filteredProducts = data.filter((p: any) => p.categoryId === this.selectedCategoryId);
+
+    } else {
+      this.filteredProducts = data;
+    }
+  });
+}
+
+
+reset() {
+  this.nuts = "";
+  this.vegetarian = ""; 
+  this.spicness = "-1"; 
+
+  this.Allproducts(); 
+  this.selectedCategoryId = null;
+}
+
   
   selectedCategoryId: number | null = null;
 
   filterByCategory(categoryId: number | null) {
     this.selectedCategoryId = categoryId;
   
- 
-    let categoryFiltered = categoryId
-      ? this.allProducts.filter((item: any) => item.categoryId === categoryId)
-      : [...this.allProducts]; 
-  
-    this.filteredProducts = categoryFiltered.filter((item: any) => {
-      const spicyMatch =
-        this.spiciness === 0 || item.spiciness === this.spiciness;
-      const nutsMatch = !this.noNuts || !item.nuts;
-      const vegMatch = !this.vegetarianOnly || item.vegeterian;
-      return spicyMatch && nutsMatch && vegMatch;
-    });
+    if (categoryId) {
+      this.filteredProducts = this.allProducts.filter((p: any) => p.categoryId === categoryId);
+
+    } else {
+      this.filteredProducts = [...this.allProducts];
+    }
   }
+  
 
 popupMessage: string = '';
 popupVisible: boolean = false;
