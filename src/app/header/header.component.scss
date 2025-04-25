@@ -1,35 +1,38 @@
-
-.header{
-width: 100%;
-height: 80px;
-background-color: hsla(0, 0%, 0%, 0.8);
-color: white;
-position: fixed;
-z-index: 999;
-display: flex;
-justify-content: space-around;
-align-items: center;
-font-weight: 300;
-border-bottom: 5px ridge red;
-.logo{
-display: flex;
-flex-direction: column;
-width: 200px;
-
-.logo-main{
-font-weight: 500;
-}
-.logo-sub{
-margin-left: 45px;
-}
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: hsla(0, 0%, 0%, 0.8);
+  color: white;
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: 300;
+  border-bottom: 5px ridge red;
+  padding: 0 0px;
 }
 
-.links-content{
-display: flex;
-align-items: center;
-gap: 60px;
+.logo {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
 
-.menu-link {
+  .logo-main {
+    font-weight: 500;
+  }
+
+  .logo-sub {
+    margin-left: 45px;
+  }
+}
+
+.links-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
+  .menu-link {
     position: relative;
     color: white;
     text-decoration: none;
@@ -39,8 +42,7 @@ gap: 60px;
     align-items: center;
     gap: 6px;
     padding-bottom: 4px;
-  
-   
+
     &::after {
       content: "";
       position: absolute;
@@ -51,8 +53,7 @@ gap: 60px;
       background-color: yellow;
       transition: width 0.5s ease;
     }
-  
- 
+
     .pizza-icon {
       opacity: 0;
       transform: translateX(-8px);
@@ -60,18 +61,18 @@ gap: 60px;
       color: #ffcc00;
       font-size: 17px;
     }
-  
+
     &:hover::after {
       width: 100%;
     }
-  
+
     &:hover .pizza-icon {
       opacity: 1;
       transform: translateX(0);
     }
   }
 
-.cart-label {
+  .cart-label {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -79,15 +80,16 @@ gap: 60px;
     cursor: pointer;
 
     .cart-text {
-        background-color: #ff4d4d;
-        padding: 1px 10px;
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-        font-size: 14px;
-        color: white;
-      }
+      background-color: #ff4d4d;
+      padding: 1px 10px;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      font-size: 14px;
+      color: white;
+    }
+
     i {
       font-size: 22px;
       transition: transform 0.6s ease;
@@ -97,26 +99,146 @@ gap: 60px;
       transform: translateX(12px);
     }
   }
-a{
-text-decoration: none;
-color: white;
-font-size: 18px;
-}
 
-}
-
-}
-.img-div{
-    width: 100%;
-    height: 350px;
-    background-image: url(img1.jpeg),linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: overlay;
+  a {
+    text-decoration: none;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    font-size: 18px;
+  }
 }
+
+.burger-btn {
+  display: none;
+  background: black;
+  border-radius: 5px;
+  padding: 1px 7px ;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 100000;
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  pointer-events: auto;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  i {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    color: #ffcc00;
+  }
+}
+
+/* Eski burger-menu artık kullanılmıyor, ister sil ister bırak */
+
+
+@media (max-width: 768px) {
+  .links-content {
+    display: none;
+  }
+
+  .burger-btn {
+    display: block;
+  }
+
+  .burger-btn i {
+    transition: transform 0.3s ease;
+  }
+}
+
+.img-div {
+  width: 100%;
+  height: 350px;
+  background-image: url(img1.jpeg), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========== EKLENEN KISIM: Fullscreen Arka Plan + Çapraz Menü ========== */
+
+.burger-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url(2.jpg); // istediğin resmi buraya koy
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease;
+  z-index: 999;
+}
+
+.burger-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.burger-strip {
+  position: fixed;
+  top: 50%;
+  left: 45%;
+  transform: translate(-150%, -50%) skewX(-15deg); // başlangıçta solda
+  width: 350px;
+  height: 100vh;
+  background-color: #ffcc00;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  transition: transform 0.6s ease;
+  z-index:1000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+
+  a {
+    color: rgb(0, 0, 0);
+    font-size: 22px;
+    text-decoration: none;
+    margin: 20px 0;
+    transform: skewX(20deg);
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #ffcc00;
+    }
+  }
+  .logo {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    gap: 5px;
+
+    .logo-main {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .logo-sub {
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: 1px;
+      margin-left: 80px;
+    }
+  }
+}
+
+.burger-strip.open {
+  transform: translate(-50%, -50%) skewX(-15deg); 
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+

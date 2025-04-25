@@ -1,35 +1,50 @@
-
-
 <div class="header">
+    <div class="logo">
+      <h1 class="logo-main">step</h1>
+      <p class="logo-sub">ordering</p>
+    </div>
+  
+    <div class="links-content" *ngIf="!isMenuOpen">
+      <a routerLink="/" class="menu-link">
+        home
+        <i class="fa-solid fa-pizza-slice pizza-icon"></i>
+      </a>
+  
+      <a class="cart-label" routerLink="/cart">
+        <span class="cart-text">Cart</span>
+        <i class="fa-solid fa-motorcycle"></i>
+      </a>
+  
+      <a class="contact" routerLink="/contact">contact</a>
+    </div>
+  </div>
+  
+  <!-- Overlay arka plan -->
+  <div class="burger-overlay" [ngClass]="{ 'open': isMenuOpen }" (click)="closeMenu()"></div>
+  
+  <!-- Çapraz şerit menü -->
+  <div class="burger-strip" [ngClass]="{ 'open': isMenuOpen }">
 
     <div class="logo">
         <h1 class="logo-main">step</h1>
         <p class="logo-sub">ordering</p>
-    </div>
+      </div>
 
-    <div class="links-content">
-        <a routerLink="/" class="menu-link">
-            home
-            <i class="fa-solid fa-pizza-slice pizza-icon" ></i>
-          </a>
-    
-    <a class="cart-label" routerLink="/cart">
-        <span class="cart-text">Cart</span>
-        <i class="fa-solid fa-motorcycle"></i>
-        
-    </a>
+    <a routerLink="/" (click)="closeMenu()">Home</a>
+    <a routerLink="/cart" (click)="closeMenu()">Cart</a>
+    <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+  </div>
+  
+  <!-- 🍔 Burger button EN SONA alındı -->
+  <button class="burger-btn" (click)="toggleMenu()">
+    <i [ngClass]="isMenuOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
+  </button>
+  
+  <div class="img-div">
+    <h2>Fast And Efficient, Online Ordering You Must Try.</h2>
+  </div>
+  
+  
+  
 
-     <a class="contact" routerLink="/contact">contact</a>
-
-   
-
-
-     
-    </div>
-
-</div>
-
-<div class="img-div">
-<h2>Fast And Efficient, Online Ordering You Must Try.</h2>
-</div>
 
