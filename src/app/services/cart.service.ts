@@ -7,93 +7,93 @@ import { Router } from '@angular/router';
 })
 export class CartService {
 
-  private storageKey = 'cart_items';  // Sepet verilerini localStorage'da saklayacağız
+  private storageKey = 'cart_items';  
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Sepet verilerini localStorage'dan yükleme
+  
   private loadItems(): any[] {
     const data = localStorage.getItem(this.storageKey);
     return data ? JSON.parse(data) : [];
   }
 
-  // Sepet verilerini localStorage'a kaydetme
+  
   private saveItems(items: any[]) {
     localStorage.setItem(this.storageKey, JSON.stringify(items));
   }
 
-  // Sepetteki tüm ürünleri almak
+  
   getItems(): any[] {
     return this.loadItems();
   }
 
-  // Sepete yeni ürün eklemek
+  
   addItem(product: any) {
     const items = this.loadItems();
     const existing = items.find(p => p.id === product.id);
 
     if (existing) {
-      existing.quantity += 1;  // Ürün zaten varsa miktarı artır
+      existing.quantity += 1;  
     } else {
-      items.push({ ...product, quantity: 1 });  // Yeni ürün ekle
+      items.push({ ...product, quantity: 1 });  
     }
 
-    this.saveItems(items);  // Güncellenmiş veriyi kaydet
+    this.saveItems(items);  
   }
 
-  // Sepetten ürün silmek
+  
   removeItem(id: number) {
-    const items = this.loadItems().filter(i => i.id !== id);  // Silinmek istenen ürün dışındaki her şeyi al
-    this.saveItems(items);  // Yeni listeyi kaydet
+    const items = this.loadItems().filter(i => i.id !== id);  
+    this.saveItems(items);  
   }
 
-  // Sepetteki ürünlerin miktarını güncellemek
+ 
   updateQuantity(id: number, change: number) {
     const items = this.loadItems().map(i => {
       if (i.id === id) {
         const newQty = i.quantity + change;
         if (newQty > 0) {
-          i.quantity = newQty;  // Miktar artırılır veya azaltılır
+          i.quantity = newQty; 
         }
       }
       return i;
-    }).filter(i => i.quantity > 0);  // Miktarı 0'dan büyük olan ürünleri tut
+    }).filter(i => i.quantity > 0);  
 
-    this.saveItems(items);  // Güncellenmiş sepeti kaydet
+    this.saveItems(items);  
   }
 
-  // Sepeti temizlemek
+  
   clearCart() {
-    this.saveItems([]);  // Boş bir sepet kaydet
+    this.saveItems([]); 
   }
 
-  // Sepetteki tüm ürünlerin toplam fiyatını hesaplamak
+  
   getTotalPrice(): number {
     const items = this.loadItems();
-    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);  // Her ürünün fiyatını miktarıyla çarpıp toplamını al
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0); 
   }
 
-  // Kullanıcı kaydını yapma
+  
   signUp(info: any) {
-    return this.http.post("https://api.everrest.educata.dev/auth/sign_up", info);  // POST isteği ile kullanıcı kaydını yap
+    return this.http.post("https://api.everrest.educata.dev/auth/sign_up", info); 
   }
 
-  // Kullanıcı girişini yapma
+  
   signIn(info: any) {
-    return this.http.post("https://api.everrest.educata.dev/auth/sign_in", info);  // POST isteği ile giriş yap
+    return this.http.post("https://api.everrest.educata.dev/auth/sign_in", info);  
   }
 
-  // Kullanıcıyı almak (session token kullanarak)
+
   getUser() {
     return this.http.get("https://api.everrest.educata.dev/auth", {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("user")}` }  // Auth header ile kullanıcının bilgilerini al
+      headers: { Authorization: `Bearer ${sessionStorage.getItem("user")}` } 
     });
   }
 
 
   signOut() {
-    sessionStorage.removeItem("user");  // Session'dan kullanıcıyı sil
-    this.router.navigate(['home']);  // Anasayfaya yönlendir
+    sessionStorage.removeItem("user");  
+    this.router.navigate(['home']); 
   }
 }
 
