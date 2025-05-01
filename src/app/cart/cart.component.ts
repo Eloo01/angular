@@ -3,12 +3,13 @@ import { NgIf, NgFor } from '@angular/common';
 import { CartService } from '../services/cart.service';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [NgIf, NgFor,RouterModule],
+  imports: [NgIf, NgFor, RouterModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
   cartItems: any[] = [];
@@ -17,18 +18,23 @@ export class CartComponent {
     this.refreshCart();
   }
 
+
   refreshCart() {
     this.cartItems = this.cartService.getItems();
   }
 
+ 
   increase(item: any) {
-    this.cartService.updateQuantity(item.id, 1);
+    this.cartService.updateQuantity(item.id, 1); 
     this.refreshCart();
   }
 
+  
   decrease(item: any) {
-    this.cartService.updateQuantity(item.id, -1);
-    this.refreshCart();
+    if (item.quantity > 1) {
+      this.cartService.updateQuantity(item.id, -1); 
+      this.refreshCart();
+    }
   }
 
   remove(item: any) {
@@ -36,9 +42,25 @@ export class CartComponent {
     this.refreshCart();
   }
 
+
   getTotal(): number {
     return this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
+
+ 
+  clearCart() {
+    this.cartService.clearCart();
+    this.refreshCart();
+  }
+
+
+  addToCart(product: any) {
+    this.cartService.addItem(product);
+    this.refreshCart();
+  }
+
+
 }
+
 
 

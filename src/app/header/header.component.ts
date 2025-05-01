@@ -18,10 +18,10 @@ export class HeaderComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
 
-    // Scroll engelleme
+
     document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
 
-    // body'ye class ekleyip çıkart (isteğe bağlı)
+
     if (this.isMenuOpen) {
       this.renderer.addClass(document.body, 'menu-open');
     } else {
