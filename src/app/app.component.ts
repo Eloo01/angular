@@ -9,7 +9,7 @@ import { AuthPageComponent } from "./auth-page/auth-page.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, HeaderComponent, RouterOutlet, FooterComponent, AuthPageComponent],
+  imports: [CommonModule, HeaderComponent, RouterOutlet, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

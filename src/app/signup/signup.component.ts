@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';  // Auth işlemi için gerekli servis
+import { CartService } from '../services/cart.service';  
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +11,7 @@ import { CartService } from '../services/cart.service';  // Auth işlemi için g
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent {
-  // Formu burada tanımlıyoruz
+  
   formInfo = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -34,12 +34,13 @@ export class SignupComponent {
     this.cartService.signUp(this.formInfo.value).subscribe((data: any) => {
       console.log('User Registered:', data);
       alert('Registration Successful');
-      this.router.navigate(['profile']); // Yönlendirme
+      this.router.navigate(['profile']); 
     }, (error) => {
       console.error('Registration failed:', error);
       alert('Registration failed. Please try again.');
     });
   }
+
 }
 
 

@@ -1,0 +1,25 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 4rem;
+    flex-wrap: wrap;
+    background: #f8f9fa;
+    min-height: 100vh;
+    width: 100%; 
+    box-sizing: border-box;  
+  
+    app-signin, app-signup {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 320px;
+      max-width: 500px;
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+  }
+  

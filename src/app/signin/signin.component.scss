@@ -1,14 +1,64 @@
 form {
-    box-shadow: 0 0 20px 2px grey;
-    width: 300px;
-    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
+    gap: 2rem;
+  
+  h3{
+margin-left: 35%;
+  }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+  
+      label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #333;
+      }
+  
+      input,
+      select {
+        padding: 0.75rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+  
+        &:focus {
+          border-color: #7c0202;
+          box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.285);
+          outline: none;
+        }
+  
+        &:hover {
+          border-color: #ff0000;
+        }
+      }
+    }
+  
 
-
-.field {
-    display: flex;
-    flex-direction: column;
-}
+      button {
+        width: 50%;
+        padding: 0.85rem;
+        background: linear-gradient(90deg, #ff0000, #690000);
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-left: 25%;
+  
+        &:hover {
+            background: linear-gradient(90deg, #850000, #370000);
+          transform: translateY(-2px);
+        }
+  
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    
+  }
+  
