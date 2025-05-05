@@ -1,50 +1,104 @@
-<form [formGroup]="formInfo"(ngSubmit)="register()">
-
-    <h3>sign up</h3>
+<form [formGroup]="formInfo" (ngSubmit)="register()">
+  <h3>Sign Up</h3>
+  <div class="form-grid">
+    
+    <!-- First Name -->
     <div class="field">
-      <label for="">First Name</label>
-      <input type="text" formControlName="field">
+      <label>First Name</label>
+      <input type="text" formControlName="firstName" />
+      <div *ngIf="formInfo.get('firstName')?.invalid && formInfo.get('firstName')?.touched" class="error-message">
+        First Name is required.
+      </div>
     </div>
+    
+    <!-- Last Name -->
     <div class="field">
-      <label for="">Last Name</label>
-      <input type="text" formControlName="field">
+      <label>Last Name</label>
+      <input type="text" formControlName="lastName" />
+      <div *ngIf="formInfo.get('lastName')?.invalid && formInfo.get('lastName')?.touched" class="error-message">
+        Last Name is required.
+      </div>
     </div>
+    
+    <!-- Age -->
     <div class="field">
-      <label for="">Age</label>
-      <input type="text" formControlName="field">
+      <label>Age</label>
+      <input type="number" formControlName="age" />
+      <div *ngIf="formInfo.get('age')?.invalid && formInfo.get('age')?.touched" class="error-message">
+        Age is required and must be between 1 and 120.
+      </div>
     </div>
+    
+    <!-- Email -->
     <div class="field">
-      <label for="">email</label>
-      <input type="email" formControlName="field">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="formInfo.get('email')?.invalid && formInfo.get('email')?.touched" class="error-message">
+        Please enter a valid email address.
+      </div>
     </div>
+    
+    <!-- Password -->
     <div class="field">
-      <label for="">Password</label>
-      <input type="text" formControlName="field">
+      <label>Password</label>
+      <input type="password" formControlName="password" />
+      <div *ngIf="formInfo.get('password')?.invalid && formInfo.get('password')?.touched" class="error-message">
+        Password is required and must be at least 6 characters long.
+      </div>
     </div>
+    
+    <!-- Phone -->
     <div class="field">
-      <label for="">Phone</label>
-      <input type="number" formControlName="field">
+      <label>Phone</label>
+      <input type="tel" formControlName="phone" (keypress)="allowOnlyNumbers($event)" />
+      <div *ngIf="formInfo.get('phone')?.invalid && formInfo.get('phone')?.touched" class="error-message">
+        Please enter a valid phone number.
+      </div>
     </div>
+    
+    <!-- Address -->
     <div class="field">
-      <label for="">Address</label>
-      <input type="text" formControlName="field">
+      <label>Address</label>
+      <input type="text" formControlName="address" />
+      <div *ngIf="formInfo.get('address')?.invalid && formInfo.get('address')?.touched" class="error-message">
+        Address is required.
+      </div>
     </div>
+    
+    <!-- ZIP -->
     <div class="field">
-      <label for="">ZIP</label>
-      <input type="text" formControlName="field">
+      <label>ZIP</label>
+      <input type="text" formControlName="zipcode" (keypress)="allowOnlyNumbers($event)" />
+      <div *ngIf="formInfo.get('zipcode')?.invalid && formInfo.get('zipcode')?.touched" class="error-message">
+        ZIP code must be between 4 and 10 digits long.
+      </div>
     </div>
+    
+    <!-- Avatar -->
     <div class="field">
-      <label for="">Avatar</label>
-      <input type="text" formControlName="field" >
+      <label>Avatar (URL)</label>
+      <input type="text" formControlName="avatar" />
+      <div *ngIf="formInfo.get('avatar')?.invalid && formInfo.get('avatar')?.touched" class="error-message">
+        Please provide a valid URL for the avatar (optional).
+      </div>
     </div>
+    
+    <!-- Gender -->
     <div class="field">
-      <label for="">Gender</label>
+      <label>Gender</label>
       <select formControlName="gender">
-        <option value="choose a gender" disabled selected hidden>Choose a gender</option>
+        <option value="" disabled selected hidden>Choose a gender</option>
         <option value="MALE">Male</option>
         <option value="FEMALE">Female</option>
         <option value="OTHER">Other</option>
       </select>
+      <div *ngIf="formInfo.get('gender')?.invalid && formInfo.get('gender')?.touched" class="error-message">
+        Gender is required.
+      </div>
     </div>
-    <button type="submit">Register</button>
-  </form>
+  </div>
+  
+  <button type="submit" [disabled]="formInfo.invalid">Register</button>
+</form>
+
+

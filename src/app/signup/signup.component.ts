@@ -1,46 +1,73 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';  
+import { CartService } from '../services/cart.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,NgIf],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent {
-  
-  formInfo = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    age: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    phone: new FormControl(''),
-    address: new FormControl(''),
-    zipcode: new FormControl(''),
-    avatar: new FormControl(''),
-    gender: new FormControl('')
-  });
 
   constructor(private router: Router, private cartService: CartService) {}
+  
+  formInfo = new FormGroup({
+    firstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),  
+    lastName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),   
+    age: new FormControl('', [Validators.required, Validators.min(1), Validators.max(120)]), 
+    email: new FormControl('', [Validators.required, Validators.email]), 
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]), 
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]{10,15}$/) 
+    ]),
+    address: new FormControl('', Validators.required), 
+    zipcode: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]{4,10}$/)
+    ]),
+    avatar: new FormControl('', [
+      Validators.pattern(/^(https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?.*$/)  
+    ]),
+    gender: new FormControl('', Validators.required) 
+  });
 
 
+
+  
   register() {
-    console.log('Form Data:', this.formInfo.value); 
+    if (this.formInfo.invalid) {
+   
+      this.formInfo.markAllAsTouched();
+      return;
+    }
 
-    this.cartService.signUp(this.formInfo.value).subscribe((data: any) => {
-      console.log('User Registered:', data);
-      alert('Registration Successful');
-      this.router.navigate(['profile']); 
-    }, (error) => {
-      console.error('Registration failed:', error);
-      alert('Registration failed. Please try again.');
+  
+    this.cartService.signUp(this.formInfo.value).subscribe({
+      next: (data: any) => {
+        alert('Registration Successful');
+        this.router.navigate(['profile']); 
+      },
+      error: (err) => {
+        alert('Registration failed. Please try again.');
+        console.error(err); 
+      }
     });
   }
 
+
+  allowOnlyNumbers(event: KeyboardEvent) {
+    const allowedChars = /^[0-9]$/;
+    if (!allowedChars.test(event.key)) {
+      event.preventDefault(); 
+    }
+  }
 }
+
+
 
 
